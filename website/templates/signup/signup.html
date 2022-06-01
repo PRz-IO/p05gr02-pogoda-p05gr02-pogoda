@@ -1,0 +1,60 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title %}
+Signup
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="../../static/register/style.css">
+{% endblock %}
+
+{% block extrascript %}
+{% endblock %}
+
+{% block content %}
+<div class="register-main-container">
+  <div class="register-center-container">
+    <div class="cat">cat</div>
+    <div class="form">
+      <form method="POST">
+        <div class="">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="">
+          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+        </div>
+        <div class="">
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
+        </div>
+        <div class="">
+          <input type="password" class="form-control" id="password2" name="password2" placeholder="Password2">
+          <small id="password2" class="form-text text-muted">Already have account?<a href="login">Login</a></small>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock%}
+
+<!-- <form method="POST">
+  <div class="">
+    <label for="emial">Email</label>
+    <input type="email" class="" id="email" name="email" placeholder="Enter email">
+  </div>
+  <div class="">
+    <label for="firstName">First Name</label>
+    <input type="text" class="" id="firstName" name="firstName" placeholder="Enter firstName">
+  </div>
+  <div class="">
+    <label for="password1">Password</label>
+    <input type="password" class="" id="password1" name="password1" placeholder="Enter password1">
+  </div>
+  <div class="">
+    <label for="password2">Password</label>
+    <input type="password" class="" id="password2" name="password2" placeholder="Enter password2">
+  </div>
+  <br />
+  <button type="submit" class="">Submit</button>
+</form> -->

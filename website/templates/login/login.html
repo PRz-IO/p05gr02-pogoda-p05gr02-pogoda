@@ -1,0 +1,33 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Login
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="../../static/login/style.css">
+{% endblock %}
+
+{% block extrascript %}
+{% endblock%}
+
+{% block content %}
+<div class="login-main-container">
+  <div class="login-center-container">
+    <div class="cat">cat</div>
+    <div class="form">
+      <form method="POST">
+        <div class="">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        </div>
+        <div class="">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+          <small id="password" class="form-text text-muted">Already have account?<a href="signup">Sign up</a></small>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock%}

@@ -1,0 +1,47 @@
+.register-main-container {
+  background: url(../assets/login-bg.jpg) no-repeat center center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-center-container {
+  width: 70vw;
+  height: 70vh;
+  max-width: 1200px;
+  max-height: 800px;
+  background: rgb(4, 0, 255);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.cat {
+  width: 50%;
+  height: 100%;
+  background: url(../assets/cat.jpg) no-repeat center center;
+  background-size: 150%;
+}
+
+.form {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(67, 77, 168);
+}
+
+.form form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form form div {
+  padding: 5px;
+  width: 80%;
+}

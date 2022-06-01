@@ -1,0 +1,20 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Home
+{% endblock %}
+
+{% block extracss %}
+<link rel="stylesheet" href="../../static/home/style.css" />
+{% endblock %}
+
+{% block extrascript %}
+<script src="../../static/home/script.js"></script>
+{% endblock%}
+
+{% block content %}
+<h1>Home page</h1>
+{% for miasto in user.miasta %}
+<li>{{miasto.nazwa_miasta}}</li>
+{% endfor %}
+{% endblock%}
