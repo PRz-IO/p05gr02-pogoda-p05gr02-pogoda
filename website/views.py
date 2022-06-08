@@ -12,12 +12,20 @@ views = Blueprint("views", __name__)
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
+    citi = ""
+    citi2 = ""
+    data = []
+    if current_user.is_authenticated:
+        for miasto in current_user.miasta:
+            data.append(miasto.nazwa_miasta)
+            data.append(miasto.pogoda_dzienna)
+    
     if request.method == 'POST':
         citi = request.form.get('miasto_data')
         citi2 = request.form.get('miasto_data2')
         print(citi)
         print(citi2)
-    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(),dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first())
+    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(),dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),miasto = data)
 
 @views.route('/testMail')
 def test():

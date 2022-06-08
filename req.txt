@@ -1,3 +1,5 @@
 flask
 Flask-Mail
 apscheduler
+flask_login
+flask_sqlalchemy
