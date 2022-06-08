@@ -35,6 +35,21 @@ Home
     <button type="submit">Log In</button>
 </form>
 
-{{miasto}}
 
+{% for p in pogoda1 %}
+{{p}}
+{% endfor %}
+<br>
+{% for p in pogoda2 %}
+{{p}}
+{% endfor %}
+
+<!-- {{miasto}} -->
+
+<br>
+<!--
+{% for m in miasto %}
+{{m}}
+{% endfor %}
+-->
 {% endblock%}

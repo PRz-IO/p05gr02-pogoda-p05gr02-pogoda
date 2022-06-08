@@ -15,17 +15,46 @@ def home():
     citi = ""
     citi2 = ""
     data = []
+    pm1 = []
+    pm2 = []
     if current_user.is_authenticated:
         for miasto in current_user.miasta:
-            data.append(miasto.nazwa_miasta)
-            data.append(miasto.pogoda_dzienna)
+            pogoda = miasto.pogoda_dzienna
+            if(pogoda):
+                    for dzien in pogoda:
+                        if(dzien.data.date() == datetime.today().date()):
+                            data.append(miasto.nazwa_miasta)
+                            data.append(dzien.min_temp)
+                            data.append(dzien.max_temp)
+                            data.append(dzien.stanpogody.stan_pogody)    
+            #data.append(miasto.nazwa_miasta)
+            #data.append(miasto.pogoda_dzienna)
     
     if request.method == 'POST':
         citi = request.form.get('miasto_data')
         citi2 = request.form.get('miasto_data2')
+        m1 = db.session.query(Miasto).filter_by(nazwa_miasta = citi).first()
+        m2 = db.session.query(Miasto).filter_by(nazwa_miasta = citi2).first()
+        
+        pog1 = m1.pogoda_dzienna
+        pog2 = m2.pogoda_dzienna
+        if(pog1):
+            for dzien1 in pog1:
+                if(dzien1.data.date() == datetime.today().date()):
+                    pm1.append(m1.nazwa_miasta)
+                    pm1.append(dzien1.min_temp)
+                    pm1.append(dzien1.max_temp)
+                    pm1.append(dzien1.stanpogody.stan_pogody)
+        if(pog2):
+            for dzien2 in pog2:
+                if(dzien2.data.date() == datetime.today().date()):
+                    pm2.append(m2.nazwa_miasta)
+                    pm2.append(dzien2.min_temp)
+                    pm2.append(dzien2.max_temp)
+                    pm2.append(dzien2.stanpogody.stan_pogody)
         print(citi)
         print(citi2)
-    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(),dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),miasto = data)
+    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(),dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),miasto = data, pogoda1 = pm1, pogoda2 = pm2)
 
 @views.route('/testMail')
 def test():
