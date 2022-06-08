@@ -10,17 +10,14 @@ from datetime import datetime
 views = Blueprint("views", __name__)
 
 
-@views.route('/')
+@views.route('/', methods=['GET', 'POST'])
 def home():
-    ...
-    # przypisane_miasta = db.session.query(Miasto).filter(Miasto.uzytkownicy!=None).all()
-    #     for miasto in przypisane_miasta:
-    #         pogoda = miasto.pogoda_dzienna
-    #             if(pogoda):
-    #                 for dzien in pogoda:
-
-    return render_template('./home/home.html', user=current_user)
-
+    if request.method == 'POST':
+        citi = request.form.get('miasto_data')
+        citi2 = request.form.get('miasto_data2')
+        print(citi)
+        print(citi2)
+    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(),dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first())
 
 @views.route('/testMail')
 def test():

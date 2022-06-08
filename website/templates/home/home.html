@@ -13,8 +13,26 @@ Home
 {% endblock%}
 
 {% block content %}
-<h1>Home page</h1>
-{% for miasto in user.miasta %}
-<li>{{miasto.nazwa_miasta}}</li>
-{% endfor %}
+<form method="POST">
+    Miasta: </br>
+    <label for="miasta"></label>
+    <input list="miasta" id="miasto_data" name="miasto_data">
+    <datalist name="miasta" id="miasta">
+        {% for citi in cities %}
+        <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
+        {% endfor %}
+    </datalist>
+    <button type="submit">Log In</button>
+</br>
+    Miasta2: </br>
+    <label for="miasta2"></label>
+    <input list="miasta2" id="miasto_data2" name="miasto_data2">
+    <datalist name="miasta2" id="miasta2">
+        {% for citi in cities %}
+        <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
+        {% endfor %}
+    </datalist>
+    <button type="submit">Log In</button>
+</form>
+
 {% endblock%}
