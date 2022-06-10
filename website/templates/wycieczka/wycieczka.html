@@ -36,9 +36,54 @@ Home
 {% for p in pogoda1 %}
 {{p}}
 {% endfor %}
+{% if pogoda1[3] == "pogodnie" %}
 <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-<br>
+{% endif %}
+{% if pogoda1[3] == "deszcz" %}
+<img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "burza" %}
+<img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "śnieg" %}
+<img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mgliście" %}
+<img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "pochmurnie" %}
+<img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mżawka" %}
+<img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+{% endif %}
+
+
 {% for p in pogoda2 %}
 {{p}}
 {% endfor %}
+{% if pogoda1[3] == "pogodnie" %}
+<img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "deszcz" %}
+<img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "burza" %}
+<img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "śnieg" %}
+<img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mgliście" %}
+<img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "pochmurnie" %}
+<img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mżawka" %}
+<img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+{% endif %}
+
+
+
 {% endblock%}
