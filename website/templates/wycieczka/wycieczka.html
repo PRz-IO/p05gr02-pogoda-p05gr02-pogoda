@@ -5,11 +5,9 @@ Home
 {% endblock %}
 
 {% block extracss %}
-<link rel="stylesheet" href="../../static/home/style.css" />
 {% endblock %}
 
 {% block extrascript %}
-<script src="../../static/home/script.js"></script>
 {% endblock%}
 
 {% block content %}
@@ -24,6 +22,15 @@ Home
     </datalist>
     <button type="submit">Szukaj</button>
     </br>
+    Miasta2: </br>
+    <label for="miasta2"></label>
+    <input list="miasta2" id="miasto_data2" name="miasto_data2">
+    <datalist name="miasta2" id="miasta2">
+        {% for citi in cities %}
+        <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
+        {% endfor %}
+    </datalist>
+    <button type="submit">Szukaj</button>
 </form>
 
 {{miasto}}

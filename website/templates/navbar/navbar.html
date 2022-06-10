@@ -14,10 +14,17 @@
 </head>
 
 <body>
-  <!-- <h1>Navbar</h1>
+  <h1>Navbar</h1>
+  {% if current_user.is_authenticated %}
+  Hello!, {{ current_user.username }}
+  <a class="nav-link" href="/logout">Log out</a>
+  <a class="nav-link" href="/wycieczka">Wycieczka</a>
+  <a class="nav-link" href="/ustawienia">Ustawienia</a>
+  {% else %}
   <a href="signup" class="">Signup</a>
   <a href="login" class="">Login</a>
-  <a href="/" class="">Home</a> -->
+  <a href="/" class="">Home</a>
+  {% endif %}
   {% block content %} {% endblock%}
   {% block extrascript %} {% endblock%}
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

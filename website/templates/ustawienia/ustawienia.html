@@ -1,0 +1,35 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Ustawienia
+{% endblock %}
+
+{% block extracss %}
+{% endblock %}
+
+{% block extrascript %}
+{% endblock%}
+
+{% block content %}
+<div class="">
+    <input type="text" class="form-control" id="haslo" name="haslo" placeholder="haslo">
+</div>
+<div class="">
+    <input type="text" class="form-control" id="username" name="username" placeholder="username">
+</div>
+<button type="submit">Zapisz zmiany</button>
+</br></br>
+Miasta: </br>
+<label for="miasta"></label>
+<input list="miasta" id="miasto_data" name="miasto_data">
+<datalist name="miasta" id="miasta">
+    {% for citi in cities %}
+    <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
+    {% endfor %}
+</datalist>
+
+</br>
+<button type="submit" class="btn btn-primary">Dodaj miasto do ulubionych</button>
+
+
+{% endblock%}
