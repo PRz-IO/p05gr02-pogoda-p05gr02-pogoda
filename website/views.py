@@ -73,6 +73,8 @@ def ustawienia():
 def home():
     citi = ""
     data = []
+    data2 = []
+    data_city = []
     pm1 = []
     pm2 = []
     if current_user.is_authenticated:
@@ -80,11 +82,25 @@ def home():
             pogoda = miasto.pogoda_dzienna
             if(pogoda):
                 for dzien in pogoda:
-                    if(dzien.data.date() == datetime.today().date()):
+                    if(dzien.data.date() >= datetime.today().date()):
                         data.append(miasto.nazwa_miasta)
                         data.append(dzien.min_temp)
                         data.append(dzien.max_temp)
                         data.append(dzien.stanpogody.stan_pogody)
+            # data.append(miasto.nazwa_miasta)
+            # data.append(miasto.pogoda_dzienna)
+
+        for miasto in current_user.miasta:
+            pogoda = miasto.pogoda_godzinowa
+            if(pogoda):
+                for godzina in pogoda:
+                    if(godzina.data.date() >= datetime.today().date()):
+                        data2.append(miasto.nazwa_miasta)
+                        data2.append(godzina.data.strftime("%H:%M:%S"))
+                        data2.append(godzina.temperatura)
+                        data2.append(godzina.predkosc_wiatru)
+                        data2.append(godzina.cisnienie)
+                        data2.append(godzina.stanpogody.stan_pogody)
             # data.append(miasto.nazwa_miasta)
             # data.append(miasto.pogoda_dzienna)
 
@@ -95,13 +111,25 @@ def home():
         pog1 = m1.pogoda_dzienna
         if(pog1):
             for dzien1 in pog1:
-                if(dzien1.data.date() == datetime.today().date()):
+                if(dzien1.data.date() >= datetime.today().date()):
                     pm1.append(m1.nazwa_miasta)
                     pm1.append(dzien1.min_temp)
                     pm1.append(dzien1.max_temp)
                     pm1.append(dzien1.stanpogody.stan_pogody)
         print(citi)
-    return render_template('./home/home.html', user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
+
+        pogoda = m1.pogoda_godzinowa
+        if(pogoda):
+            for godzina in pogoda:
+                if(godzina.data.date() >= datetime.today().date()):
+                    data2.append(godzina.data.strftime("%H:%M:%S"))
+                    data2.append(godzina.temperatura)
+                    data2.append(godzina.predkosc_wiatru)
+                    data2.append(godzina.cisnienie)
+                    data2.append(godzina.stanpogody.stan_pogody)
+    return render_template('./home/home.html', user=current_user,
+                           cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),
+                           miasto=data, pogoda1=pm1, pogoda2=pm2, data2=data2, data_city=data_city)
 
 
 @views.route('/testMail')
