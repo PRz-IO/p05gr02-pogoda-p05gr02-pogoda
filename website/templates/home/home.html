@@ -13,6 +13,7 @@ Home
 {% endblock%}
 
 {% block content %}
+{% if not current_user.is_authenticated %}
 <form method="POST">
     Miasta: </br>
     <label for="miasta"></label>
@@ -22,27 +23,43 @@ Home
         <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
         {% endfor %}
     </datalist>
-    <button type="submit">Log In</button>
-</br>
-    Miasta2: </br>
-    <label for="miasta2"></label>
-    <input list="miasta2" id="miasto_data2" name="miasto_data2">
-    <datalist name="miasta2" id="miasta2">
-        {% for citi in cities %}
-        <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
-        {% endfor %}
-    </datalist>
-    <button type="submit">Log In</button>
+    <button type="submit">Szukaj</button>
+    </br>
 </form>
-
-
 {% for p in pogoda1 %}
 {{p}}
 {% endfor %}
+
+{% if pogoda1[3] == "pogodnie" %}
+<img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "deszcz" %}
+<img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "burza" %}
+<img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "śnieg" %}
+<img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mgliście" %}
+<img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "pochmurnie" %}
+<img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+{% endif %}
+{% if pogoda1[3] == "mżawka" %}
+<img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+{% endif %}
+{% endif %}
+
+{{miasto}}
+
+
 <br>
-{% for p in pogoda2 %}
+<!--{% for p in pogoda2 %}
 {{p}}
-{% endfor %}
+{% endfor %} -->
 
 <!-- {{miasto}} -->
 
