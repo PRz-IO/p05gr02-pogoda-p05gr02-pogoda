@@ -1,5 +1,8 @@
 .login-main-container {
-  background: url(../assets/login-bg.jpg) no-repeat center center;
+  background: url(../assets/background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,7 +14,7 @@
   height: 70vh;
   max-width: 1200px;
   max-height: 800px;
-  background: rgb(4, 0, 255);
+  background: #04243D;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,7 +32,7 @@
 .form {
   width: 50%;
   height: 100%;
-  background-color: rgb(67, 77, 168);
+  background-color: #D9A60D;
 }
 
 .form form {
@@ -45,3 +48,32 @@
   padding: 5px;
   width: 80%;
 }
+
+.badge-secondary {
+  background-color: #D9A60D ;
+  color: #162C55;
+  margin-bottom: 2vh;
+}
+
+.btn-primary {
+  background-color: #162C55;
+  border-color: #162C55;
+}
+
+.btn-primary:hover {
+  background-color: #0d1b35;
+  border-color: #0d1b35;
+}
+
+.text-muted {
+  color: #2d4777 !important;
+}
+
+.pytanko {
+  color: #2d4777 !important;
+}
+
+.pytanko:visited {
+  color: #162C55 !important;
+}
+

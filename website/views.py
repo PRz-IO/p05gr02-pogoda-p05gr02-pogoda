@@ -83,10 +83,7 @@ def home():
             if(pogoda):
                 for dzien in pogoda:
                     if(dzien.data.date() >= datetime.today().date()):
-                        data.append(miasto.nazwa_miasta)
-                        data.append(dzien.min_temp)
-                        data.append(dzien.max_temp)
-                        data.append(dzien.stanpogody.stan_pogody)
+                        data.append([miasto.nazwa_miasta, dzien.min_temp, dzien.max_temp, dzien.stanpogody.stan_pogody])
             # data.append(miasto.nazwa_miasta)
             # data.append(miasto.pogoda_dzienna)
 

@@ -1,7 +1,7 @@
 {% extends "./navbar/navbar.html" %}
 
 {% block title%}
-Login
+Logowanie
 {% endblock %}
 
 {% block extracss %}
@@ -14,18 +14,21 @@ Login
 {% block content %}
 <div class="login-main-container">
   <div class="login-center-container">
-    <div class="cat">cat</div>
+    <div class="cat"></div>
     <div class="form">
       <form method="POST">
-        <div class="">
-          <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+        <div class="badge badge-secondary">          
+          <h1>Witaj ponownie!</h1>
         </div>
         <div class="">
-          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
-          <small id="password" class="form-text text-muted">Already have account?<a href="signup">Sign up</a></small>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
+        <div class="">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Hasło">
+          <small id="password" class="form-text text-muted">Nie masz konta? <a href="signup" class="pytanko">Zarejestruj się</a></small>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Zaloguj</button>
       </form>
     </div>
   </div>

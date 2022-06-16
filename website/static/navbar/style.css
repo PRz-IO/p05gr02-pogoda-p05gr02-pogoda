@@ -2,3 +2,7 @@
   margin: 0px;
   padding: 0px;
 }
+
+.navbar-light {
+  background-color: #D9A60D !important;
+}
