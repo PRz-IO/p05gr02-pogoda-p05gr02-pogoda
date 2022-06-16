@@ -1,7 +1,7 @@
 {% extends "./navbar/navbar.html" %}
 
 {% block title %}
-Signup
+Rejestracja
 {% endblock %}
 
 {% block extracss %}
@@ -14,24 +14,27 @@ Signup
 {% block content %}
 <div class="register-main-container">
   <div class="register-center-container">
-    <div class="cat">cat</div>
+    <div class="cat"></div>
     <div class="form">
       <form method="POST">
-        <div class="">
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        <div class="badge badge-secondary">          
+          <h1>Witaj!</h1>
         </div>
         <div class="">
-          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="">
-          <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
+          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Imię" required>
         </div>
         <div class="">
-          <input type="password" class="form-control" id="password2" name="password2" placeholder="Password2">
-          <small id="password2" class="form-text text-muted">Already have account?<a href="login">Login</a></small>
+          <input type="password" class="form-control" id="password1" name="password1" placeholder="Hasło" required>
+        </div>
+        <div class="">
+          <input type="password" class="form-control" id="password2" name="password2" placeholder="Powtórz hasło" required>
+          <small id="password2" class="form-text text-muted">Masz już konto? <a href="login" class="pytanko">Zaloguj się</a></small>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Zarejestruj</button>
       </form>
     </div>
   </div>
