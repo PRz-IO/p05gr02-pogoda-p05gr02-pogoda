@@ -57,6 +57,11 @@ class PogodaDzienna(db.Model):#pewnie zamiast min max temp lepiej wziąć temper
     max_temp = db.Column(db.Integer)
     id_miasta = db.Column(db.Integer, ForeignKey("miasto.id"), nullable = False)
     id_stan_pogody = db.Column(db.Integer, ForeignKey("stanpogody.id"), nullable = False)
+    rano = db.Column(db.Integer)
+    poludnie = db.Column(db.Integer)
+    wieczor = db.Column(db.Integer)
+    noc = db.Column(db.Integer)
+    opad = db.Column(db.Integer)
 
 class PogodaGodzinowa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
