@@ -74,3 +74,13 @@ td {
   border-left: 1px solid #ad850b !important;
   border-right: 1px solid #ad850b !important;
 }
+
+.table-log {
+  height: 100%;
+  width: 30vw;
+  padding-top: 50px;
+}
+
+h2 {
+  margin-top: 50px;
+}
