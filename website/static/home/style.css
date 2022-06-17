@@ -15,7 +15,7 @@
   height: 70vh;
   max-width: 1200px;
   max-height: 800px;
-  background: #D9A60D;
+  background: #d90d87;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,13 +43,13 @@
 }
 
 .btn-primary {
-  background-color: #162C55;
-  border-color: #162C55;
+  background-color: #12499b;
+  border-color: #12499b;
 }
 
 .btn-primary:hover {
-  background-color: #0d1b35;
-  border-color: #0d1b35;
+  background-color: #12499b;
+  border-color: #12499b;
 }
 
 table {
@@ -59,20 +59,20 @@ table {
 }
 
 th {
-  border-top: 1px solid #ad850b !important;
-  border-bottom: 1px solid #ad850b !important;
+  border-top: 1px solid #ad0b8a !important;
+  border-bottom: 1px solid #ad0b8a !important;
   
 }
 
 td {
   width: 25%;
   height: 130px;
-  border-top: 1px solid #ad850b !important;
+  border-top: 1px solid #ad0b8a !important;
 }
 
 .inner {
-  border-left: 1px solid #ad850b !important;
-  border-right: 1px solid #ad850b !important;
+  border-left: 1px solid #ad0b8a !important;
+  border-right: 1px solid #ad0b8a !important;
 }
 
 .table-log {

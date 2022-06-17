@@ -1,0 +1,81 @@
+/*tlo*/
+.main-container {
+    background: url(../assets/kolor.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  /*tabela*/
+.center-main-container { 
+    width: 50vw;
+    height: 70vh;
+    max-width: 1200px;
+    max-height: 800px;
+    background: #e6699d;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 25px;
+    overflow: hidden;
+    float: right;
+    text-align: center;
+    justify-content: center;
+  }
+  .center {
+    height: 100%;
+    margin: 0;
+  }
+  .form {
+    width: 100%;
+    height: 100%;
+    background-color: #e6699d;
+  }
+  .table {
+    height: 50%;
+    margin: 0;
+  }
+  
+  .btn-primary {
+    background-color: #6f91d2;
+    border-color: #6f91d2;
+  }
+  
+  
+  table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+  }
+  
+  th {
+    border-top: 1px solid #e6699d !important;
+    border-bottom: 1px solid #e6699d !important;
+    
+  }
+  
+  td {
+    width: 25%;
+    height: 130px;
+    border-top: 1px solid #020202 !important;
+  }
+  
+  .inner {
+    border-left: 1px solid #030504 !important;
+    border-right: 1px solid #050a06 !important;
+  }
+  
+  .table-log {
+    height: 100%;
+    width: 30vw;
+    padding-top: 50px;
+  }
+  
+  h2 {
+    margin-top: 100px;
+  }

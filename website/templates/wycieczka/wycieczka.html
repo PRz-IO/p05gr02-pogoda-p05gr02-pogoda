@@ -5,85 +5,130 @@ Wycieczka
 {% endblock %}
 
 {% block extracss %}
+<link rel="stylesheet" href="../../static/wycieczka/style.css" />
+
 {% endblock %}
 
 {% block extrascript %}
 {% endblock%}
 
 {% block content %}
-<form method="POST">
-    Miasta: </br>
-    <label for="miasta"></label>
-    <input list="miasta" id="miasto_data" name="miasto_data">
-    <datalist name="miasta" id="miasta">
-        {% for citi in cities %}
-        <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
-        {% endfor %}
-    </datalist>
-    </br>
-    Miasta2: </br>
-    <label for="miasta2"></label>
-    <input list="miasta2" id="miasto_data2" name="miasto_data2">
-    <datalist name="miasta2" id="miasta2">
-        {% for citi in cities %}
-        <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
-        {% endfor %}
-    </datalist>
-    </br>
-    <button type="submit">Szukaj</button>
-</form>
+<div class="main-container">
+    <div class="center-main-container">
+        <div class="center">
+            
+            <div class="form">
+                <div><h2>Porównaj pogodę</h2></div>
+                </br>
+                <form method="POST">
+                    Miasto pierwsze: </br>
+                <label for="miasta"></label>
+                    <input list="miasta" id="miasto_data" name="miasto_data">
+                    <datalist name="miasta" id="miasta">
+                        {% for citi in cities %}
+                        <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
+                        {% endfor %}
+                    </datalist>
+                    </br>
+                    Miasto drugie: </br>
+                    <label for="miasta2"></label>
+                    <input list="miasta2" id="miasto_data2" name="miasto_data2">
+                    <datalist name="miasta2" id="miasta2">
+                        {% for citi in cities %}
+                        <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
+                        {% endfor %}
+                    </datalist>
+                    </br>
+                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                </br>
+                </br>
+                </form>
+            </div>
+           
+            <!-- {% if tabela %} -->
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Miasto pierwsze</th>
+                        <th class="inner"> Miasto drugie</th>
+                        <th class="inner">Maksymalna</br> temperatura</th>
+                    
+                        <th>Stan pogody</th>
+                    </tr>
+                    
+                    
+                    {% for p in pogoda1 %}
+                    <tr>
+                        <td>{{pogoda1[0]}}</td>
+                        <td class="inner">{{pogoda1[1]}}</td>
+                        <td class="inner">{{pogoda1[2]}}</td>
+                        
+                        <td>{% if pogoda1[3] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda1[3] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+                    </tr>
+                    {% endfor %}
 
-{% for p in pogoda1 %}
-{{p}}
-{% endfor %}
-{% if pogoda1[3] == "pogodnie" %}
-<img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "deszcz" %}
-<img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "burza" %}
-<img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "śnieg" %}
-<img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "mgliście" %}
-<img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "pochmurnie" %}
-<img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "mżawka" %}
-<img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-{% endif %}
+                    {% for p in pogoda2 %}
+                    <tr>
+                        <td>{{pogoda2[0]}}</td>
+                        <td class="inner">{{pogoda2[1]}}</td>
+                        <td class="inner">{{pogoda2[2]}}</td>
+                        
+                        
+                        <td>{% if pogoda2[3] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda2[3] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda2[3] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %} 
+                            {% if pogoda2[3] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda2[3] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda2[3] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if pogoda2[3] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+
+                    </tr> 
+                    {% endfor %}
+
+                    
+                   
+                </table>
+            </div>
+            <!-- {% endif %} -->
 
 
-{% for p in pogoda2 %}
-{{p}}
-{% endfor %}
-{% if pogoda1[3] == "pogodnie" %}
-<img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "deszcz" %}
-<img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "burza" %}
-<img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "śnieg" %}
-<img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "mgliście" %}
-<img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "pochmurnie" %}
-<img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-{% endif %}
-{% if pogoda1[3] == "mżawka" %}
-<img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-{% endif %}
-
-
+        </div>
+        
+    </div>
+</div>
 
 {% endblock%}

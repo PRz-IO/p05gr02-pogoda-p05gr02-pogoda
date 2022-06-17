@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
+from sqlalchemy import false, true
 from .models import User, Kraj, Miasto, Atrybut, Jednostka, stanpogody, PogodaDzienna, PogodaGodzinowa
 from . import db
 from flask_login import login_user, current_user, logout_user
@@ -12,6 +13,7 @@ views = Blueprint("views", __name__)
 
 @views.route('/wycieczka', methods=['GET', 'POST'])
 def wycieczka():
+    zmienna = false
     citi = ""
     citi2 = ""
     data = []
@@ -31,6 +33,7 @@ def wycieczka():
             # data.append(miasto.pogoda_dzienna)
 
     if request.method == 'POST':
+        zmienna = true
         citi = request.form.get('miasto_data')
         citi2 = request.form.get('miasto_data2')
         m1 = db.session.query(Miasto).filter_by(nazwa_miasta=citi).first()
@@ -54,7 +57,7 @@ def wycieczka():
                     pm2.append(dzien2.stanpogody.stan_pogody)
         print(citi)
         print(citi2)
-    return render_template('./wycieczka/wycieczka.html', user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
+    return render_template('./wycieczka/wycieczka.html',tabela=zmienna, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
 
 
 @views.route('/ustawienia', methods=['GET', 'POST'])
