@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import User, Kraj, Miasto, Atrybut, Jednostka, stanpogody, PogodaDzienna, PogodaGodzinowa
 from . import db
 from flask_login import login_user, current_user, logout_user
@@ -64,12 +64,22 @@ def wycieczka():
 def ustawienia():
     if request.method == 'POST':
         citi = request.form.get('miasto_data')
-        dodawane_miasto = db.session.query(
-            Miasto).filter_by(nazwa_miasta=citi).first()
-        current_user.miasta.append(dodawane_miasto)
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username :
+            current_user.username = username
+        if password :
+            current_user.password = password
+
+        if citi :
+            dodawane_miasto = db.session.query(
+                Miasto).filter_by(nazwa_miasta=citi).first()
+            current_user.miasta.append(dodawane_miasto)
+            
         db.session.commit()
     return render_template('./ustawienia/ustawienia.html',
                            user=current_user, cities=db.session.query(Miasto).all())
+    
 
 
 @views.route('/', methods=['GET', 'POST'])
@@ -150,11 +160,16 @@ def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
         firstName = request.form.get('firstName')
-        passwords = [request.form.get(
-            'password1'), request.form.get('password1')]
-        new_user = User(email=email, username=firstName, password=passwords[0])
-        db.session.add(new_user)
-        db.session.commit()
+        if User.query.filter_by(email=email).first():
+            flash("Taki email istnieje", category='error')
+            print("dupa")
+        else :
+            passwords = [request.form.get(
+                'password1'), request.form.get('password1')]
+            new_user = User(email=email, username=firstName, password=passwords[0])
+            db.session.add(new_user)
+            db.session.commit()
+
     return render_template('./signup/signup.html')
 
 
