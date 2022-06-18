@@ -1,0 +1,64 @@
+{% extends "./navbar/navbar.html" %}
+
+{% block title%}
+Strona główna
+{% endblock %}
+
+
+{% block extracss %}
+<link rel="stylesheet" href="../../static/home/style.css" />
+{% endblock %}
+
+{% block extrascript %}
+<script src="../../static/home/script.js"></script>
+{% endblock%}
+
+{% block content %}
+<div class="main-container">
+    <div class="center-main-container">
+        <div class="center">
+            {% if not current_user.is_authenticated %}
+        </div>
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Godzina</th>
+                    <th class="inner">Temperatura</th>
+                    <th class="inner">Prędkość wiatru</th>
+                    <th class="inner">Ciśnienie</th>
+                    <th>Stan pogody</th>
+                </tr>
+                <tr>
+                    <td>{{data2[1]}}</td>
+                    <td class="inner">{data2[2]}}</td>
+                    <td class="inner">{{data2[3]}}</td>
+                    <td class="inner">{{data2[4]}}</td>
+                    <td> {% if data2[5] == "pogodnie" %}
+                        <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "deszcz" %}
+                        <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "burza" %}
+                        <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "śnieg" %}
+                        <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "mgliście" %}
+                        <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "pochmurnie" %}
+                        <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                        {% endif %}
+                        {% if pogoda1[5] == "mżawka" %}
+                        <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        {%endif%}
+    </div>
+</div>
+{% endblock%}
