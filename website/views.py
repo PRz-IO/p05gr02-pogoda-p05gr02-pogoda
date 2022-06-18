@@ -160,15 +160,22 @@ def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
         firstName = request.form.get('firstName')
+        passwords = [request.form.get(
+                'password1'), request.form.get('password2')]
         if User.query.filter_by(email=email).first():
             flash("Taki email istnieje", category='error')
-            print("dupa")
+        elif  User.query.filter_by(username=firstName).first():
+            flash("Podany login już istnieje", category='error')
+        elif len(passwords[0]) < 6:
+            # flash("Za krótkie hasło",category='erorr')
+            flash("Za krotkie haslo", category='error')
+        elif passwords[0]!=passwords[1]:
+            flash("Hasla musza byc takie same",category='error')
         else :
-            passwords = [request.form.get(
-                'password1'), request.form.get('password1')]
             new_user = User(email=email, username=firstName, password=passwords[0])
             db.session.add(new_user)
             db.session.commit()
+            return redirect(url_for('views.login'))
 
     return render_template('./signup/signup.html')
 
