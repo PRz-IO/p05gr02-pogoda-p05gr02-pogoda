@@ -15,7 +15,7 @@
   height: 70vh;
   max-width: 1200px;
   max-height: 800px;
-  background: #d90d87;
+  background: #D9A60D;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,45 +40,48 @@
 .table {
   height: 50%;
   margin: 0;
+  
 }
 
 .btn-primary {
-  background-color: #12499b;
-  border-color: #12499b;
+  background-color: #162C55;
+  border-color: #162C55;
 }
 
 .btn-primary:hover {
-  background-color: #12499b;
-  border-color: #12499b;
+  background-color: #162C55;
+  border-color: #162C55;
 }
 
 table {
   width: 100%;
   margin: 0;
   border-collapse: collapse;
+  
 }
 
 th {
-  border-top: 1px solid #ad0b8a !important;
-  border-bottom: 1px solid #ad0b8a !important;
+  border-top: 1px solid #ad850b !important;
+  border-bottom: 1px solid #ad850b !important;
   
 }
 
 td {
   width: 25%;
   height: 130px;
-  border-top: 1px solid #ad0b8a !important;
+  border-top: 1px solid #ad850b !important;
 }
 
 .inner {
-  border-left: 1px solid #ad0b8a !important;
-  border-right: 1px solid #ad0b8a !important;
+  border-left: 1px solid #ad850b !important;
+  border-right: 1px solid #ad850b !important;
 }
 
 .table-log {
   height: 100%;
   width: 30vw;
   padding-top: 50px;
+  overflow: auto;
 }
 
 h2 {

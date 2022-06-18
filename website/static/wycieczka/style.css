@@ -33,12 +33,13 @@
   }
   .form {
     width: 100%;
-    height: 100%;
+    height: 30%;
     background-color: #e6699d;
   }
   .table {
-    height: 50%;
+    height: 70%;
     margin: 0;
+    overflow: auto;
   }
   
   .btn-primary {
@@ -78,4 +79,8 @@
   
   h2 {
     margin-top: 100px;
+  }
+
+  .navbar-light {
+    background-color: #e6699d !important;
   }

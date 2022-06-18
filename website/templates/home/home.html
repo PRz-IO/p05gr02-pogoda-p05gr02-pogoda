@@ -80,14 +80,16 @@ Strona główna
             <div class="table-log">
                 <table >
                     <tr>
-                        <th>Miasto</th>
+                        <th>Data</th>
+                        <th class="inner">Miasto</th>
                         <th class="inner">Minimalna</br> temperatura</th>
                         <th class="inner">Maksymalna</br> temperatura</th>
                         <th>Stan pogody</th>
                     </tr>
                     {% for m in miasto %}
                     <tr>
-                        <td>{{m[0]}}</td>
+                        <td>{{m[4]}}</td>
+                        <td class="inner">{{m[0]}}</td>
                         <td class="inner">{{m[1]}}</td>
                         <td class="inner">{{m[2]}}</td>
                         <td> {% if m[3] == "pogodnie" %}

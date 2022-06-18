@@ -12,11 +12,11 @@ Wycieczka
 {% block extrascript %}
 {% endblock%}
 
+
 {% block content %}
 <div class="main-container">
     <div class="center-main-container">
         <div class="center">
-            
             <div class="form">
                 <div><h2>Porównaj pogodę</h2></div>
                 </br>
@@ -40,24 +40,21 @@ Wycieczka
                     </datalist>
                     </br>
                     <button type="submit" class="btn btn-primary">Szukaj</button>
-                </br>
-                </br>
                 </form>
             </div>
-           
-            <!-- {% if tabela %} -->
+            <br>
             <div class="table">
                 <table>
                     <tr>
-                        <th>Miasto pierwsze</th>
-                        <th class="inner"> Miasto drugie</th>
+                        <th>Miasto</th>
+                        <th class="inner"> Minimalna<br>temperatura</th>
                         <th class="inner">Maksymalna</br> temperatura</th>
                     
                         <th>Stan pogody</th>
                     </tr>
                     
                     
-                    {% for p in pogoda1 %}
+                   
                     <tr>
                         <td>{{pogoda1[0]}}</td>
                         <td class="inner">{{pogoda1[1]}}</td>
@@ -85,9 +82,9 @@ Wycieczka
                             <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
                             {% endif %}
                     </tr>
-                    {% endfor %}
+                    
 
-                    {% for p in pogoda2 %}
+                    
                     <tr>
                         <td>{{pogoda2[0]}}</td>
                         <td class="inner">{{pogoda2[1]}}</td>
@@ -117,15 +114,13 @@ Wycieczka
                             {% endif %}
 
                     </tr> 
-                    {% endfor %}
+                   
 
                     
                    
                 </table>
             </div>
-            <!-- {% endif %} -->
-
-
+               
         </div>
         
     </div>

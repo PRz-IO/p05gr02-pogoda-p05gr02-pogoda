@@ -42,7 +42,7 @@ def create_app():
     # models
     from .models import User
     from .przyklad import zaladuj_przyklad, dodaj
-    from .codziennePowiadomienie import powiadomieniePogodowe
+    from .codziennePowiadomienie import powiadomieniePogodowe, porada
     from .wczytywaniePogody import wczytaj
     # database startup
     create_database(app)
@@ -59,6 +59,7 @@ def create_app():
     #zaladuj_przyklad(app, db)
     #dodaj(app,db)
     #wczytaj(app,db)
+    powiadomieniePogodowe(app,db)
 
     sched = BackgroundScheduler(daemon=True)
     sched.add_job(powiadomieniePogodowe, 'cron', day='*', hour=8, minute=30, args=(app, db)) #każdego dnia o godzinie 8:30 wykonuje funkcję
