@@ -31,25 +31,29 @@ def wycieczka():
         m1 = db.session.query(Miasto).filter_by(nazwa_miasta=citi).first()
         m2 = db.session.query(Miasto).filter_by(nazwa_miasta=citi2).first()
 
-        pog1 = m1.pogoda_dzienna
-        pog2 = m2.pogoda_dzienna
-        if(pog1):
-            for dzien1 in pog1:
-                if(dzien1.data.date() == time.date()):
-                    pm1.append(m1.nazwa_miasta)
-                    pm1.append(dzien1.min_temp)
-                    pm1.append(dzien1.max_temp)
-                    pm1.append(dzien1.stanpogody.stan_pogody)
-        if(pog2):
-            for dzien2 in pog2:
-                if(dzien2.data.date() == time2.date()):
-                    pm2.append(m2.nazwa_miasta)
-                    pm2.append(dzien2.min_temp)
-                    pm2.append(dzien2.max_temp)
-                    pm2.append(dzien2.stanpogody.stan_pogody)
-        print(citi)
-        print(citi2)
-        print(pm1)
+        if m1 is None or m2 is None:
+            flash("Wybierz poprawne miasto",category='error')
+        else:
+
+            pog1 = m1.pogoda_dzienna
+            pog2 = m2.pogoda_dzienna
+            if(pog1):
+                for dzien1 in pog1:
+                    if(dzien1.data.date() == time.date()):
+                        pm1.append(m1.nazwa_miasta)
+                        pm1.append(dzien1.min_temp)
+                        pm1.append(dzien1.max_temp)
+                        pm1.append(dzien1.stanpogody.stan_pogody)
+            if(pog2):
+                for dzien2 in pog2:
+                    if(dzien2.data.date() == time2.date()):
+                        pm2.append(m2.nazwa_miasta)
+                        pm2.append(dzien2.min_temp)
+                        pm2.append(dzien2.max_temp)
+                        pm2.append(dzien2.stanpogody.stan_pogody)
+            print(citi)
+            print(citi2)
+            print(pm1)
     return render_template('./wycieczka/wycieczka.html', poczatek=data1, koniec=data2, tabela=zmienna, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
 
 
@@ -131,23 +135,26 @@ def home():
         citi = request.form.get('miasto_data')
         m1 = db.session.query(Miasto).filter_by(nazwa_miasta=citi).first()
 
-        pog1 = m1.pogoda_dzienna
-        if(pog1):
-            for dzien1 in pog1:
-                if(dzien1.data.date() >= datetime.today().date()):
-                    pm1.append([m1.nazwa_miasta,dzien1.min_temp,dzien1.max_temp,dzien1.stanpogody.stan_pogody,dzien1.data.date()])
-                    # pm1.append(m1.nazwa_miasta)
-                    # pm1.append(dzien1.min_temp)
-                    # pm1.append(dzien1.max_temp)
-                    # pm1.append(dzien1.stanpogody.stan_pogody)
-                    # pm1.append(dzien1.data)
-        #print(citi)
-        #print(pm1)
-        pogoda = m1.pogoda_godzinowa
-        if(pogoda):
-            for godzina in pogoda:
-                if(godzina.data.date() >= datetime.today().date()):
-                    data2.append([m1.nazwa_miasta,godzina.data.strftime("%H:%M:%S"),godzina.temperatura,godzina.predkosc_wiatru,godzina.cisnienie,godzina.stanpogody.stan_pogody])
+        if m1 is None:
+            flash("Wybierz poprawne miasto",category='error')
+        else:
+            pog1 = m1.pogoda_dzienna
+            if(pog1):
+                for dzien1 in pog1:
+                    if(dzien1.data.date() >= datetime.today().date()):
+                        pm1.append([m1.nazwa_miasta,dzien1.min_temp,dzien1.max_temp,dzien1.stanpogody.stan_pogody,dzien1.data.date()])
+                        # pm1.append(m1.nazwa_miasta)
+                        # pm1.append(dzien1.min_temp)
+                        # pm1.append(dzien1.max_temp)
+                        # pm1.append(dzien1.stanpogody.stan_pogody)
+                        # pm1.append(dzien1.data)
+            #print(citi)
+            #print(pm1)
+            pogoda = m1.pogoda_godzinowa
+            if(pogoda):
+                for godzina in pogoda:
+                    if(godzina.data.date() >= datetime.today().date()):
+                        data2.append([m1.nazwa_miasta,godzina.data.strftime("%H:%M:%S"),godzina.temperatura,godzina.predkosc_wiatru,godzina.cisnienie,godzina.stanpogody.stan_pogody])
 
     return render_template('./home/home.html', user=current_user,
                            cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),
