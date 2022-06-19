@@ -8,17 +8,24 @@
 }
 
 .flash-container{
-  width: 500px;
+  width: 600px;
+  height: 72px;
   position: absolute;
   display: flex;
+  font-size: 1.25rem;
+  font-weight: bold;
   align-items: center;
   flex-direction: column;
-  background-color:red;
-  top: 30px;
-  left: calc(50vw - 250px);
+  /* background-color:red; */
+  top: 0px;
+  background-image: url("https://openweathermap.org/img/wn/11n@2x.png");
+  left: calc(50vw - 200px);
   /* animation: fading 5s;
   animation-fill-mode: forwards; */
-  z-index: 1;
+  /* z-index: 1; */
+  background-position: right; 
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 160px 120px;
 }
 
 @keyframes fading {
@@ -30,4 +37,7 @@
     opacity: 0;
     display: none;
   }
+}
+.error{
+  margin:auto 0;
 }
