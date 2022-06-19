@@ -39,22 +39,7 @@ Rejestracja
     </div>
   </div>
 </div>
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-        {% for category, message in messages %}
-            {% if category=='error' %}
-                <div class="flash-container">
-                <p class="error">{{ message }}</p>
-                </div>
-            {% endif %}
-            {% if category=='success' %}
-                <div class="flash-container">
-                <p class="success">{{ message }}</p>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-{% endwith %}
+
 {% endblock%}
 
 <!-- <form method="POST">

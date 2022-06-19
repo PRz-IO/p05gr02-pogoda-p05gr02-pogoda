@@ -76,27 +76,3 @@
 .pytanko:visited {
   color: #162C55 !important;
 }
-.flash-container{
-  width: 500px;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background-color:red;
-  top: 30px;
-  left: calc(50vw - 250px);
-  /* animation: fading 5s;
-  animation-fill-mode: forwards; */
-  z-index: 1;
-}
-
-@keyframes fading {
-  70% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    display: none;
-  }
-}

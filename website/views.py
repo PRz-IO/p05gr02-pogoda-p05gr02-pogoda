@@ -78,7 +78,8 @@ def ustawienia():
                 current_user.miasta.append(dodawane_miasto)
             else:
                 print("masz już takie miasto gamoniu") #daj tu jakiegoś flasza marek
-        
+                flash("Masz już takie miasto przypisane",category='error')
+
         temp = request.form.get('temp')
         predkosc = request.form.get('predkosc')
         current_user.preferencje.clear()
