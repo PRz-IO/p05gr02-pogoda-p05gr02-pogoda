@@ -5,7 +5,7 @@ from flask_login import login_user, current_user, logout_user
 from flask_mail import Mail, Message
 from . import mail
 from flask import current_app as app
-from datetime import datetime
+from datetime import datetime, timedelta
 
 views = Blueprint("views", __name__)
 
@@ -18,21 +18,14 @@ def wycieczka():
     data = []
     pm1 = []
     pm2 = []
-    # if current_user.is_authenticated:
-    #     for miasto in current_user.miasta:
-    #         pogoda = miasto.pogoda_dzienna
-    #         if(pogoda):
-    #             for dzien in pogoda:
-    #                 if(dzien.data.date() == datetime.today().date()):
-    #                     data.append(miasto.nazwa_miasta)
-    #                     data.append(dzien.min_temp)
-    #                     data.append(dzien.max_temp)
-    #                     data.append(dzien.stanpogody.stan_pogody)
-    #         # data.append(miasto.nazwa_miasta)
-    #         # data.append(miasto.pogoda_dzienna)
+    
+    data1 = datetime.today().date()    
+    data2 = datetime.today().date() + timedelta(days=7)
 
     if request.method == 'POST':
         zmienna = True
+        time = datetime.strptime(request.form.get('time'), '%Y-%m-%d')
+        time2 = datetime.strptime(request.form.get('time2'), '%Y-%m-%d')
         citi = request.form.get('miasto_data')
         citi2 = request.form.get('miasto_data2')
         m1 = db.session.query(Miasto).filter_by(nazwa_miasta=citi).first()
@@ -42,14 +35,14 @@ def wycieczka():
         pog2 = m2.pogoda_dzienna
         if(pog1):
             for dzien1 in pog1:
-                if(dzien1.data.date() == datetime.today().date()):
+                if(dzien1.data.date() == time.date()):
                     pm1.append(m1.nazwa_miasta)
                     pm1.append(dzien1.min_temp)
                     pm1.append(dzien1.max_temp)
                     pm1.append(dzien1.stanpogody.stan_pogody)
         if(pog2):
             for dzien2 in pog2:
-                if(dzien2.data.date() == datetime.today().date()):
+                if(dzien2.data.date() == time2.date()):
                     pm2.append(m2.nazwa_miasta)
                     pm2.append(dzien2.min_temp)
                     pm2.append(dzien2.max_temp)
@@ -57,7 +50,7 @@ def wycieczka():
         print(citi)
         print(citi2)
         print(pm1)
-    return render_template('./wycieczka/wycieczka.html', tabela=zmienna, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
+    return render_template('./wycieczka/wycieczka.html', poczatek=data1, koniec=data2, tabela=zmienna, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
 
 
 @views.route('/ustawienia', methods=['GET', 'POST'])

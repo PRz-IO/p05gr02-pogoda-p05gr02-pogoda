@@ -41,6 +41,12 @@ Wycieczka
                         {% endfor %}
                     </datalist>
                     </br>
+                    <input type="date" id="start" name="time"
+                        value={{poczatek}}
+                        min={{poczatek}} max={{koniec}}>
+                    <input type="date" id="start" name="time2"
+                        value={{poczatek}}
+                        min={{poczatek}} max={{koniec}}>
                     <button type="submit" class="btn btn-primary">Szukaj</button>
                 </form>
             </div>
