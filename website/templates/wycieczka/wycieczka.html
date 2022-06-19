@@ -23,7 +23,7 @@ Wycieczka
                 <form method="POST">
                     Miasto pierwsze: </br>
                 <label for="miasta"></label>
-                    <input list="miasta" id="miasto_data" name="miasto_data">
+                    <input list="miasta" id="miasto_data" name="miasto_data" required>
                     <datalist name="miasta" id="miasta">
                         {% for citi in cities %}
                         <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
@@ -32,7 +32,7 @@ Wycieczka
                     </br>
                     Miasto drugie: </br>
                     <label for="miasta2"></label>
-                    <input list="miasta2" id="miasto_data2" name="miasto_data2">
+                    <input list="miasta2" id="miasto_data2" name="miasto_data2" required>
                     <datalist name="miasta2" id="miasta2">
                         {% for citi in cities %}
                         <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />

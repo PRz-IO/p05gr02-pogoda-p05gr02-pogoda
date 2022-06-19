@@ -74,7 +74,19 @@ def ustawienia():
         if citi:
             dodawane_miasto = db.session.query(
                 Miasto).filter_by(nazwa_miasta=citi).first()
-            current_user.miasta.append(dodawane_miasto)
+            if (not dodawane_miasto in current_user.miasta):
+                current_user.miasta.append(dodawane_miasto)
+            else:
+                print("masz już takie miasto gamoniu") #daj tu jakiegoś flasza marek
+        
+        temp = request.form.get('temp')
+        predkosc = request.form.get('predkosc')
+        current_user.preferencje.clear()
+        dtemp = db.session.query(Jednostka).filter_by(id=temp).first()
+        dpred = db.session.query(Jednostka).filter_by(id=predkosc).first()
+        dwil = db.session.query(Jednostka).filter_by(nazwa_jednostki="%").first()
+        dcis = db.session.query(Jednostka).filter_by(nazwa_jednostki="hPa").first()
+        current_user.preferencje.extend([dtemp, dcis, dpred, dwil])
 
         db.session.commit()
     return render_template('./ustawienia/ustawienia.html',
@@ -86,9 +98,11 @@ def home():
     citi = ""
     data = []
     data2 = []
+    data3 = []
     data_city = []
     pm1 = []
     pm2 = []
+    jednostki = []
     if current_user.is_authenticated:
         for miasto in current_user.miasta:
             pogoda = miasto.pogoda_dzienna
@@ -105,14 +119,19 @@ def home():
             if(pogoda):
                 for godzina in pogoda:
                     if(godzina.data.date() >= datetime.today().date()):
-                        data2.append(miasto.nazwa_miasta)
-                        data2.append(godzina.data.strftime("%H:%M:%S"))
-                        data2.append(godzina.temperatura)
-                        data2.append(godzina.predkosc_wiatru)
-                        data2.append(godzina.cisnienie)
-                        data2.append(godzina.stanpogody.stan_pogody)
+                        data3.append([miasto.nazwa_miasta,godzina.data.strftime("%H:%M:%S"),godzina.temperatura,godzina.predkosc_wiatru,godzina.cisnienie,godzina.stanpogody.stan_pogody])
+                        # data2.append(miasto.nazwa_miasta)
+                        # data2.append(godzina.data.strftime("%H:%M:%S"))
+                        # data2.append(godzina.temperatura)
+                        # data2.append(godzina.predkosc_wiatru)
+                        # data2.append(godzina.cisnienie)
+                        # data2.append(godzina.stanpogody.stan_pogody)
             # data.append(miasto.nazwa_miasta)
             # data.append(miasto.pogoda_dzienna)
+        for jednostka in current_user.preferencje:
+            jednostki.append(jednostka)
+
+
 
     if request.method == 'POST':
         citi = request.form.get('miasto_data')
@@ -122,25 +141,27 @@ def home():
         if(pog1):
             for dzien1 in pog1:
                 if(dzien1.data.date() >= datetime.today().date()):
-                    pm1.append(m1.nazwa_miasta)
-                    pm1.append(dzien1.min_temp)
-                    pm1.append(dzien1.max_temp)
-                    pm1.append(dzien1.stanpogody.stan_pogody)
-                    pm1.append(dzien1.data)
+                    pm1.append([m1.nazwa_miasta,dzien1.min_temp,dzien1.max_temp,dzien1.stanpogody.stan_pogody,dzien1.data.date()])
+                    # pm1.append(m1.nazwa_miasta)
+                    # pm1.append(dzien1.min_temp)
+                    # pm1.append(dzien1.max_temp)
+                    # pm1.append(dzien1.stanpogody.stan_pogody)
+                    # pm1.append(dzien1.data)
         print(citi)
         print(pm1)
         pogoda = m1.pogoda_godzinowa
         if(pogoda):
             for godzina in pogoda:
                 if(godzina.data.date() >= datetime.today().date()):
-                    data2.append(godzina.data.strftime("%H:%M:%S"))
-                    data2.append(godzina.temperatura)
-                    data2.append(godzina.predkosc_wiatru)
-                    data2.append(godzina.cisnienie)
-                    data2.append(godzina.stanpogody.stan_pogody)
+                    data2.append([m1.nazwa_miasta,godzina.data.strftime("%H:%M:%S"),godzina.temperatura,godzina.predkosc_wiatru,godzina.cisnienie,godzina.stanpogody.stan_pogody])
+                    # data2.append(godzina.data.strftime("%H:%M:%S"))
+                    # data2.append(godzina.temperatura)
+                    # data2.append(godzina.predkosc_wiatru)
+                    # data2.append(godzina.cisnienie)
+                    # data2.append(godzina.stanpogody.stan_pogody)
     return render_template('./home/home.html', user=current_user,
                            cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(),
-                           miasto=data, pogoda1=pm1, pogoda2=pm2, data2=data2, data_city=data_city)
+                           miasto=data, pogoda1=pm1, pogoda2=pm2, data2=data2, data3=data3, data_city=data_city, jednostki=jednostki)
 
 
 @views.route('/pogoda7dni', methods=['GET', 'POST'])
