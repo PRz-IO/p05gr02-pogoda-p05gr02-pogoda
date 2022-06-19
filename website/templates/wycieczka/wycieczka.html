@@ -18,21 +18,23 @@ Wycieczka
     <div class="center-main-container">
         <div class="center">
             <div class="form">
-                <div><h2>Porównaj pogodę</h2></div>
-                </br>
+
+                <h2>Porównaj pogodę</h2>
+
+
                 <form method="POST">
-                    Miasto pierwsze: </br>
-                <label for="miasta"></label>
-                    <input list="miasta" id="miasto_data" name="miasto_data" required>
+                    <br>
+                    <label for="miasta"></label>
+                    <input list="miasta" id="miasto_data" name="miasto_data" required placeholder="Miasto pierwsze">
                     <datalist name="miasta" id="miasta">
                         {% for citi in cities %}
                         <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
                         {% endfor %}
                     </datalist>
-                    </br>
-                    Miasto drugie: </br>
+
+                    <!-- Miasto drugie: </br> -->
                     <label for="miasta2"></label>
-                    <input list="miasta2" id="miasto_data2" name="miasto_data2" required>
+                    <input list="miasta2" id="miasto_data2" name="miasto_data2" required placeholder="Miasto drugie">
                     <datalist name="miasta2" id="miasta2">
                         {% for citi in cities %}
                         <option id="miasto2" name="miasto2" value={{citi.nazwa_miasta}} />
@@ -43,23 +45,21 @@ Wycieczka
                 </form>
             </div>
             <br>
+            <br>
+            {%if pogoda1%}
             <div class="table">
                 <table>
                     <tr>
                         <th>Miasto</th>
-                        <th class="inner"> Minimalna<br>temperatura</th>
-                        <th class="inner">Maksymalna</br> temperatura</th>
-                    
-                        <th>Stan pogody</th>
+                        <th class="inner">Minimalna<br>temperatura</th>
+                        <th class="inner">Maksymalna</br>temperatura</th>
+                        <th>Stan</br>pogody</th>
                     </tr>
-                    
-                    
-                   
                     <tr>
                         <td>{{pogoda1[0]}}</td>
                         <td class="inner">{{pogoda1[1]}}</td>
                         <td class="inner">{{pogoda1[2]}}</td>
-                        
+
                         <td>{% if pogoda1[3] == "pogodnie" %}
                             <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
                             {% endif %}
@@ -82,15 +82,15 @@ Wycieczka
                             <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
                             {% endif %}
                     </tr>
-                    
 
-                    
+
+
                     <tr>
                         <td>{{pogoda2[0]}}</td>
                         <td class="inner">{{pogoda2[1]}}</td>
                         <td class="inner">{{pogoda2[2]}}</td>
-                        
-                        
+
+
                         <td>{% if pogoda2[3] == "pogodnie" %}
                             <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
                             {% endif %}
@@ -99,7 +99,7 @@ Wycieczka
                             {% endif %}
                             {% if pogoda2[3] == "burza" %}
                             <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-                            {% endif %} 
+                            {% endif %}
                             {% if pogoda2[3] == "śnieg" %}
                             <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
                             {% endif %}
@@ -113,16 +113,18 @@ Wycieczka
                             <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
                             {% endif %}
 
-                    </tr> 
-                   
+                    </tr>
 
-                    
-                   
+
+
+
                 </table>
+                <br><br>
             </div>
-               
+            {%endif%}
+
         </div>
-        
+
     </div>
 </div>
 

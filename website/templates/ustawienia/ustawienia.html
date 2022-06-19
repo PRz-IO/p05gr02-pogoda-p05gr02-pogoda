@@ -16,26 +16,14 @@ Ustawienia
     <div class="center-main-container">
         
         <form method="POST">
-            <div class="">
-                <input type="text" class="form-control" id="haslo" name="haslo" placeholder="haslo">
-            </div>
+            <h2> Edycja ustawień </h2>
             <div class="">
                 <input type="text" class="form-control" id="username" name="username" placeholder="username">
             </div>
-            <button type="submit">Zapisz zmiany</button>
-            </br></br>
-            Miasta: </br>
-            <label for="miasta"></label>
-            <input list="miasta" id="miasto_data" name="miasto_data">
-            <datalist name="miasta" id="miasta">
-                {% for citi in cities %}
-                <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
-                {% endfor %}
-            </datalist>
+            <div class="">
+                <input type="text" class="form-control" id="haslo" name="haslo" placeholder="haslo">
+            </div>
             
-            </br>
-            <button type="submit" class="btn btn-primary">Dodaj miasto do ulubionych</button>
-            <br>
             <br>
             <input class="form-check-input" type="radio" name="temp" id="temp" value="1" checked>
             <label class="form-check-label" for="flexRadioDefault2">°C</label>
@@ -48,6 +36,22 @@ Ustawienia
             <br>
             <input class="form-check-input" type="radio" name="predkosc" id="predkosc" value="5">
             <label class="form-check-label" for="predkosc">mph</label>
+            <br>
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+            
+            <h2> Miasta </h2>
+            <label for="miasta"></label>
+            <input list="miasta" id="miasto_data" name="miasto_data">
+            <datalist name="miasta" id="miasta">
+                {% for citi in cities %}
+                <option id="miasto" name="miasto" value={{citi.nazwa_miasta}} />
+                {% endfor %}
+            </datalist>
+            
+            </br>
+            <button type="submit" class="btn btn-primary">Dodaj miasto do ulubionych</button>
+            <br>
+            
         
         </form>
 

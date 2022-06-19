@@ -17,7 +17,7 @@ Strona główna
 <div class="main-container">
     <div class="center-main-container">
         <div class="center">
-        {% if not current_user.is_authenticated %}
+            {% if not current_user.is_authenticated %}
             <div class="form">
                 <div>
                     <h2>Znajdź pogodę dla Twojego miasta</h2>
@@ -47,8 +47,8 @@ Strona główna
                     <button type="submit" class="btn btn-primary">Pogoda na najbliższe 7 dni</button>
                 </form>
              </div>  -->
-                
-            
+            <br><br>
+
             <div class="table" id="tydzien">
                 <table>
                     <tr>
@@ -86,10 +86,11 @@ Strona główna
                             <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
                             {% endif %}
                         </td>
-                        
+
                     </tr>
                     {%endfor%}
                 </table>
+                <br>
             </div>
 
             <div class="table" id="godzina">
@@ -133,227 +134,235 @@ Strona główna
                     {%endfor%}
                 </table>
             </div>
-        {%endif%}
+            {%endif%}
         </div>
         {% endif %}
 
-    {% if current_user.is_authenticated %}
-    <br>    
-    <button onclick="wyszukiwarka()" class="btn btn-primary" id="wysz" >Twoje miasta</button>
-    <span id="wyszukiwarka">
-        <div class="form">
-            <div>
-                <h2>Znajdź pogodę dla miasta</h2>
+        {% if current_user.is_authenticated %}
+        <br>
+        <button onclick="wyszukiwarka()" class="btn btn-primary" id="wysz">Twoje miasta</button>
+        <span id="wyszukiwarka">
+            <div class="form">
+                <div>
+                    <h2>Znajdź pogodę dla miasta</h2>
+                </div>
+                </br>
+                <form method="POST">
+                    Wybierz miasto:
+                    <label for="miasta"></label>
+                    <input list="miasta" id="miasto_data" name="miasto_data" required>
+
+                    <datalist name="miasta" id="miasta">
+                        {% for citi in cities %}
+                        <option id="miasto" name="miasto" value={{citi.nazwa_miasta}}>
+                            {% endfor %}
+                    </datalist>
+
+                    <button type="submit" class="btn btn-primary">Szukaj</button>
+                    </br>
+                    </br>
+                </form>
             </div>
-            </br>
-            <form method="POST">
-                Wybierz miasto:
-                <label for="miasta"></label>
-                <input list="miasta" id="miasto_data" name="miasto_data" required>
-
-                <datalist name="miasta" id="miasta">
-                    {% for citi in cities %}
-                    <option id="miasto" name="miasto" value={{citi.nazwa_miasta}}>
-                        {% endfor %}
-                </datalist>
-
-                <button type="submit" class="btn btn-primary">Szukaj</button>
-                </br>
-                </br>
-            </form>
-        </div>
-        {%if pogoda1|length >0 %}
-        <button onclick="przelaczanie1()" class="btn btn-primary" id="prz1">Pogoda godzinowa</button>
-        <!-- <div class="form">
+            {%if pogoda1|length >0 %}
+            <button onclick="przelaczanie1()" class="btn btn-primary" id="prz1">Pogoda godzinowa</button>
+            <!-- <div class="form">
             <form method="POST">
                 <button type="submit" class="btn btn-primary">Pogoda godzinowa</button>
                 <button type="submit" class="btn btn-primary">Pogoda na najbliższe 7 dni</button>
             </form>
          </div>  -->
-            
-        
-        <div class="table" id="tydzien1">
-            <table>
-                <tr>
-                    <th>Data</th>
-                    <!-- <th class="inner">Miasto</th> -->
-                    <th class="inner">Minimalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th class="inner">Maksymalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th>Stan pogody</th>
-                </tr>
-                {% for pog in pogoda1%}
-                <tr>
-                    <td>{{pog[4]}}</td>
-                    <!-- <td class="inner">{{pogoda1[0]}}</td> -->
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
-                    <td> {% if pog[3] == "pogodnie" %}
-                        <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "deszcz" %}
-                        <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "burza" %}
-                        <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "śnieg" %}
-                        <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "mgliście" %}
-                        <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "pochmurnie" %}
-                        <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[3] == "mżawka" %}
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-                        {% endif %}
-                    </td>
-                    
-                </tr>
-                {%endfor%}
-            </table>
-        </div>
-
-        <div class="table" id="godzina1">
-            <table>
-                <tr>
-                    <th>Godzina</th>
-                    <th class="inner">Temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th class="inner">Prędkość wiatru<br>{{jednostki[2].nazwa_jednostki}}</th>
-                    <th class="inner">Ciśnienie<br>hPa</th>
-                    <th>Stan pogody</th>
-                </tr>
-                {% for pog in data2%}
-                <tr>
-                    <td>{{pog[1]}}</td>
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[2]|round}}{%else%}{{(pog[2]*1.8 + 32)|round}}{%endif%}</td>
-                    <td class="inner">{%if jednostki[2].nazwa_jednostki == 'mph'%}{{(pog[3]*0.62137)|round}}{%else%}{{pog[3]|round}}{%endif%}</td>
-                    <td class="inner">{{pog[4]}}</td>
-                    <td> {% if pog[5] == "pogodnie" %}
-                        <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[5] == "deszcz" %}
-                        <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-                        {% endif %} 
-                        {% if pog[5] == "burza" %}
-                        <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[5] == "śnieg" %}
-                        <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[5] == "mgliście" %}
-                        <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[5] == "pochmurnie" %}
-                        <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-                        {% endif %}
-                        {% if pog[5] == "mżawka" %}
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-                        {% endif %}
-                    </td>
-                </tr>
-                {%endfor%}
-            </table>
-        </div> 
-        {%endif%}    
-    </span>    
-    <span id="miastaUzytkownika" style="display:none">
-        <div>
-            <h2>Pogoda dla Twojego miasta</h2>
-        </div>
-        <button onclick="przelaczanie()" class="btn btn-primary" id="prz2">Pogoda godzinowa</button>
-        <div class="table-log" id="tydzien">
-            <table>
-                <tr>
-                    <th>Data</th>
-                    <th class="inner">Miasto</th>
-                    <th class="inner">Minimalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th class="inner">Maksymalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th>Stan pogody</th>
-                </tr>
-                {% for m in miasto %}
-                <tr>
-                    <td>{{m[4]}}</td>
-                    <td class="inner">{{m[0]}}</td>
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[1]|round}}{%else%}{{(m[1]*1.8 + 32)|round}}{%endif%}</td>
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[2]|round}}{%else%}{{(m[2]*1.8 + 32)|round}}{%endif%}</td>
-                    <td> {% if m[3] == "pogodnie" %}
-                        <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "deszcz" %}
-                        <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "burza" %}
-                        <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "śnieg" %}
-                        <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "mgliście" %}
-                        <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "pochmurnie" %}
-                        <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-                        {% endif %}
-                        {% if m[3] == "mżawka" %}
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div class="table-log" id="godzina">
-            <table>
-                <tr>
-                    <th>Godzina</th>
-                    <th class="inner">Miasto</th>
-                    <th class="inner">Temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
-                    <th class="inner">Prędkość wiatru<br>{{jednostki[2].nazwa_jednostki}}</th>
-                    <th class="inner">Ciśnienie<br>hPa</th>
-                    <th>Stan pogody</th>
-                </tr>
-                {% for m in data3 %}
-                <tr>
-                    <td>{{m[1]}}</td>
-                    <td class="inner">{{m[0]}}</td>
-                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[2]|round}}{%else%}{{(m[2]*1.8 + 32)|round}}{%endif%}</td>
-                    <td class="inner">{%if jednostki[2].nazwa_jednostki == 'mph'%}{{(m[3]*0.62137)|round}}{%else%}{{m[3]|round}}{%endif%}</td>
-                    <td class="inner">{{m[4]}}</td>
-                    <td> {% if m[5] == "pogodnie" %}
-                        <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "deszcz" %}
-                        <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "burza" %}
-                        <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "śnieg" %}
-                        <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "mgliście" %}
-                        <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "pochmurnie" %}
-                        <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
-                        {% endif %}
-                        {% if m[5] == "mżawka" %}
-                        <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </span>
 
 
+            <div class="table" id="tydzien1">
+                <table>
+                    <tr>
+                        <th>Data</th>
+                        <!-- <th class="inner">Miasto</th> -->
+                        <th class="inner">Minimalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th class="inner">Maksymalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th>Stan pogody</th>
+                    </tr>
+                    {% for pog in pogoda1%}
+                    <tr>
+                        <td>{{pog[4]}}</td>
+                        <!-- <td class="inner">{{pogoda1[0]}}</td> -->
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki ==
+                            'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki ==
+                            'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
+                        <td> {% if pog[3] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[3] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+                        </td>
+
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+
+            <div class="table" id="godzina1">
+                <table>
+                    <tr>
+                        <th>Godzina</th>
+                        <th class="inner">Temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th class="inner">Prędkość wiatru<br>{{jednostki[2].nazwa_jednostki}}</th>
+                        <th class="inner">Ciśnienie<br>hPa</th>
+                        <th>Stan pogody</th>
+                    </tr>
+                    {% for pog in data2%}
+                    <tr>
+                        <td>{{pog[1]}}</td>
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki ==
+                            'C'%}{{pog[2]|round}}{%else%}{{(pog[2]*1.8 + 32)|round}}{%endif%}</td>
+                        <td class="inner">{%if jednostki[2].nazwa_jednostki ==
+                            'mph'%}{{(pog[3]*0.62137)|round}}{%else%}{{pog[3]|round}}{%endif%}</td>
+                        <td class="inner">{{pog[4]}}</td>
+                        <td> {% if pog[5] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if pog[5] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </table>
+            </div>
+            {%endif%}
+        </span>
+        <span id="miastaUzytkownika" style="display:none">
+            <div>
+                <h2>Pogoda dla Twojego miasta</h2>
+            </div>
+            <button onclick="przelaczanie()" class="btn btn-primary" id="prz2">Pogoda godzinowa</button>
+            <div class="table-log" id="tydzien">
+                <table>
+                    <tr>
+                        <th>Data</th>
+                        <th class="inner">Miasto</th>
+                        <th class="inner">Minimalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th class="inner">Maksymalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th>Stan pogody</th>
+                    </tr>
+                    {% for m in miasto %}
+                    <tr>
+                        <td>{{m[4]}}</td>
+                        <td class="inner">{{m[0]}}</td>
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[1]|round}}{%else%}{{(m[1]*1.8 +
+                            32)|round}}{%endif%}</td>
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[2]|round}}{%else%}{{(m[2]*1.8 +
+                            32)|round}}{%endif%}</td>
+                        <td> {% if m[3] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if m[3] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="table-log" id="godzina">
+                <table>
+                    <tr>
+                        <th>Godzina</th>
+                        <th class="inner">Miasto</th>
+                        <th class="inner">Temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                        <th class="inner">Prędkość wiatru<br>{{jednostki[2].nazwa_jednostki}}</th>
+                        <th class="inner">Ciśnienie<br>hPa</th>
+                        <th>Stan pogody</th>
+                    </tr>
+                    {% for m in data3 %}
+                    <tr>
+                        <td>{{m[1]}}</td>
+                        <td class="inner">{{m[0]}}</td>
+                        <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{m[2]|round}}{%else%}{{(m[2]*1.8 +
+                            32)|round}}{%endif%}</td>
+                        <td class="inner">{%if jednostki[2].nazwa_jednostki ==
+                            'mph'%}{{(m[3]*0.62137)|round}}{%else%}{{m[3]|round}}{%endif%}</td>
+                        <td class="inner">{{m[4]}}</td>
+                        <td> {% if m[5] == "pogodnie" %}
+                            <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "deszcz" %}
+                            <img src="http://openweathermap.org/img/wn/09d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "burza" %}
+                            <img src="http://openweathermap.org/img/wn/11d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "śnieg" %}
+                            <img src="http://openweathermap.org/img/wn/13d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "mgliście" %}
+                            <img src="http://openweathermap.org/img/wn/50d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "pochmurnie" %}
+                            <img src="http://openweathermap.org/img/wn/02d@2x.png"></img>
+                            {% endif %}
+                            {% if m[5] == "mżawka" %}
+                            <img src="http://openweathermap.org/img/wn/10d@2x.png"></img>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </span>
 
 
 
-    
+
+
+
     </div>
 </div>
 {%endif%}
