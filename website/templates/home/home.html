@@ -37,7 +37,11 @@ Strona główna
                     <button type="submit" class="btn btn-primary">Szukaj</button>
                     </br>
                     </br>
+
                 </form>
+                {%if pogoda1 %}
+                <h4>Pogoda dla miasta {{pogoda1[0][0]}}</h4>
+                {%endif%}
             </div>
             {%if pogoda1|length >0 %}
             <button onclick="przelaczanie()" class="btn btn-primary" id="prz2">Pogoda godzinowa</button>
@@ -90,7 +94,7 @@ Strona główna
                     </tr>
                     {%endfor%}
                 </table>
-                <br>
+                <br><br>
             </div>
 
             <div class="table" id="godzina">
@@ -133,6 +137,7 @@ Strona główna
                     </tr>
                     {%endfor%}
                 </table>
+                <br><br>
             </div>
             {%endif%}
         </div>
