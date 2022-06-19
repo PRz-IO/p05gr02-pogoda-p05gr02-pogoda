@@ -32,15 +32,15 @@
 }
 
 .form {
-  height: 50%;
+  height: 35%;
   margin: 0;
   padding: 50px;
 }
 
 .table {
-  height: 50%;
+  height: 65%;
   margin: 0;
-  
+  overflow:auto;
 }
 
 .btn-primary {
@@ -80,10 +80,17 @@ td {
 .table-log {
   height: 100%;
   width: 30vw;
-  padding-top: 50px;
-  overflow: auto;
+  /* padding-top: 50px; */
+  overflow: scroll;
 }
 
 h2 {
   margin-top: 50px;
+}
+
+#miastaUzytkownika{
+  height:100%;
+}
+#wyszukiwarka{
+  height:100%;
 }

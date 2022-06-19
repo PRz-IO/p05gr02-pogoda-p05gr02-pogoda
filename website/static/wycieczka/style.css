@@ -17,7 +17,7 @@
     height: 70vh;
     max-width: 1200px;
     max-height: 800px;
-    background: #e6699d;
+    background: #F29BB2;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -34,7 +34,7 @@
   .form {
     width: 100%;
     height: 30%;
-    background-color: #e6699d;
+    background-color: #F29BB2;
   }
   .table {
     height: 70%;
@@ -55,8 +55,8 @@
   }
   
   th {
-    border-top: 1px solid #e6699d !important;
-    border-bottom: 1px solid #e6699d !important;
+    border-top: 1px solid #F29BB2 !important;
+    border-bottom: 1px solid #F29BB2 !important;
     
   }
   
@@ -82,5 +82,5 @@
   }
 
   .navbar-light {
-    background-color: #e6699d !important;
+    background-color: #F29BB2 !important;
   }
