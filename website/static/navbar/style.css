@@ -20,8 +20,8 @@
   top: 0px;
   background-image: url("https://openweathermap.org/img/wn/11n@2x.png");
   left: calc(50vw - 200px);
-  /* animation: fading 5s;
-  animation-fill-mode: forwards;  */
+  animation: fading 2s;
+  animation-fill-mode: forwards;  
   background-position: right; 
   background-repeat: no-repeat; 
   background-size: 160px 130px;
