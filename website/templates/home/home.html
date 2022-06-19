@@ -40,7 +40,7 @@ Strona główna
                 </form>
             </div>
             {%if pogoda1|length >0 %}
-            <button onclick="przelaczanie()" class="btn btn-primary">Przełącz</button>
+            <button onclick="przelaczanie()" class="btn btn-primary" id="prz2">Pogoda godzinowa</button>
             <!-- <div class="form">
                 <form method="POST">
                     <button type="submit" class="btn btn-primary">Pogoda godzinowa</button>
@@ -133,16 +133,17 @@ Strona główna
                     {%endfor%}
                 </table>
             </div>
-            {%endif%}
+        {%endif%}
         </div>
         {% endif %}
 
-    {% if current_user.is_authenticated %}    
-    <button onclick="wyszukiwarka()" class="btn btn-primary">Wyszukiwarka</button>
+    {% if current_user.is_authenticated %}
+    <br>    
+    <button onclick="wyszukiwarka()" class="btn btn-primary" id="wysz" >Twoje miasta</button>
     <span id="wyszukiwarka">
         <div class="form">
             <div>
-                <h2>Znajdź pogodę dla Twojego miasta</h2>
+                <h2>Znajdź pogodę dla miasta</h2>
             </div>
             </br>
             <form method="POST">
@@ -162,7 +163,7 @@ Strona główna
             </form>
         </div>
         {%if pogoda1|length >0 %}
-        <button onclick="przelaczanie1()" class="btn btn-primary">Przełącz</button>
+        <button onclick="przelaczanie1()" class="btn btn-primary" id="prz1">Pogoda godzinowa</button>
         <!-- <div class="form">
             <form method="POST">
                 <button type="submit" class="btn btn-primary">Pogoda godzinowa</button>
@@ -176,16 +177,16 @@ Strona główna
                 <tr>
                     <th>Data</th>
                     <!-- <th class="inner">Miasto</th> -->
-                    <th class="inner">Minimalna</br> temperatura<br>°C</th>
-                    <th class="inner">Maksymalna</br> temperatura<br>°C</th>
+                    <th class="inner">Minimalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                    <th class="inner">Maksymalna</br> temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
                     <th>Stan pogody</th>
                 </tr>
                 {% for pog in pogoda1%}
                 <tr>
                     <td>{{pog[4]}}</td>
                     <!-- <td class="inner">{{pogoda1[0]}}</td> -->
-                    <td class="inner">{{pog[1]}}</td>
-                    <td class="inner">{{pog[2]}}</td>
+                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
+                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[1]|round}}{%else%}{{(pog[1]*1.8 + 32)|round}}{%endif%}</td>
                     <td> {% if pog[3] == "pogodnie" %}
                         <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
                         {% endif %}
@@ -218,16 +219,16 @@ Strona główna
             <table>
                 <tr>
                     <th>Godzina</th>
-                    <th class="inner">Temperatura<br>°C</th>
-                    <th class="inner">Prędkość wiatru<br>km/h</th>
+                    <th class="inner">Temperatura<br>°{{jednostki[0].nazwa_jednostki}}</th>
+                    <th class="inner">Prędkość wiatru<br>{{jednostki[2].nazwa_jednostki}}</th>
                     <th class="inner">Ciśnienie<br>hPa</th>
                     <th>Stan pogody</th>
                 </tr>
                 {% for pog in data2%}
                 <tr>
                     <td>{{pog[1]}}</td>
-                    <td class="inner">{{pog[2]}}</td>
-                    <td class="inner">{{pog[3]}}</td>
+                    <td class="inner">{%if jednostki[0].nazwa_jednostki == 'C'%}{{pog[2]|round}}{%else%}{{(pog[2]*1.8 + 32)|round}}{%endif%}</td>
+                    <td class="inner">{%if jednostki[2].nazwa_jednostki == 'mph'%}{{(pog[3]*0.62137)|round}}{%else%}{{pog[3]|round}}{%endif%}</td>
                     <td class="inner">{{pog[4]}}</td>
                     <td> {% if pog[5] == "pogodnie" %}
                         <img src="http://openweathermap.org/img/wn/01d@2x.png"></img>
@@ -257,11 +258,11 @@ Strona główna
         </div> 
         {%endif%}    
     </span>    
-    <span id="miastaUzytkownika">
+    <span id="miastaUzytkownika" style="display:none">
         <div>
             <h2>Pogoda dla Twojego miasta</h2>
         </div>
-        <button onclick="przelaczanie()" class="btn btn-primary">Przełącz</button>
+        <button onclick="przelaczanie()" class="btn btn-primary" id="prz2">Pogoda godzinowa</button>
         <div class="table-log" id="tydzien">
             <table>
                 <tr>
