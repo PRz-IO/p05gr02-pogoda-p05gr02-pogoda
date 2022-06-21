@@ -216,6 +216,7 @@ def login():
                             if(dzien.data.date() == datetime.today().date()):
                                 #napis = miasto.nazwa_miasta.upper()+": min.: "+str(dzien.min_temp)+"°C, maks.: "+str(dzien.max_temp)+"°C. "+porada(dzien)
                                 napis = f"{miasto.nazwa_miasta} - temp. minimalna: {dzien.min_temp}°C, temp. maksymalna: {dzien.max_temp}°C. {porada(dzien)}"
+                                flash(napis, category='_'+str(i))
                                 i=i+1
                     if(i>3): break
 
