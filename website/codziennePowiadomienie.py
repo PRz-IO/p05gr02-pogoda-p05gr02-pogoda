@@ -27,6 +27,14 @@ def porada(pogoda): #do dokończenia
     if(pogoda.poludnie < 10):
         #print("Zapowiada się na chłodny dzień - ubierz się ciepło!")
         return("Zapowiada się na chłodny dzień - ubierz się ciepło!")
+    if(pogoda.id_stan_pogody == 1):
+        return("Zapowiada się na pogodny dzień!")
+    if(pogoda.id_stan_pogody == 6):
+        return("Zapowiada się na pochmurny dzień!")
+    if(pogoda.id_stan_pogody == 4):
+        return("Zapowiada się na śnieg!")
+    else:
+        return("")
 
 def powiadomieniePogodowe(app, db):
     with app.app_context():
