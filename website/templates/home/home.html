@@ -149,7 +149,7 @@ Strona główna
         <span id="wyszukiwarka">
             <div class="form">
                 <div>
-                    <h2>Znajdź pogodę dla miasta</h2>
+                    <h2>Znajdź pogodę dla Twojego miasta</h2>
                 </div>
                 </br>
                 <form method="POST">
@@ -166,7 +166,11 @@ Strona główna
                     <button type="submit" class="btn btn-primary">Szukaj</button>
                     </br>
                     </br>
+
                 </form>
+                {%if pogoda1 %}
+                <h4>Pogoda dla miasta {{pogoda1[0][0]}}</h4>
+                {%endif%}
             </div>
             {%if pogoda1|length >0 %}
             <button onclick="przelaczanie1()" class="btn btn-primary" id="prz1">Pogoda godzinowa</button>
@@ -176,6 +180,7 @@ Strona główna
                 <button type="submit" class="btn btn-primary">Pogoda na najbliższe 7 dni</button>
             </form>
          </div>  -->
+            <br><br>
 
 
             <div class="table" id="tydzien1">
