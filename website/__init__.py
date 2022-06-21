@@ -24,7 +24,7 @@ def create_app():
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
     app.config['MAIL_USERNAME'] = 'aplikacjapogodowa2022@gmail.com'
-    app.config['MAIL_PASSWORD'] = 'HasloApkaPogodowa1!'
+    app.config['MAIL_PASSWORD'] = 'plruhagrleztpyff'
     app.config['MAIL_DEFAULT_SENDER'] = (
         'Aplikacja Pogodowa', 'aplikacjapogodowa2022@gmail.com')
     app.config['MAIL_ASSCII_ATTACHMENTS'] = False
@@ -60,7 +60,7 @@ def create_app():
     #zaladuj_przyklad(app, db)
     # dodaj(app,db)
     #wczytaj(app, db)
-    # powiadomieniePogodowe(app,db)
+    #powiadomieniePogodowe(app,db)
 
     sched = BackgroundScheduler(daemon=True)
     sched.add_job(powiadomieniePogodowe, 'cron', day='*', hour=8, minute=30,
