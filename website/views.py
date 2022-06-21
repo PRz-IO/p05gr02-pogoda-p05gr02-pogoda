@@ -6,13 +6,12 @@ from flask_mail import Mail, Message
 from . import mail
 from flask import current_app as app
 from datetime import datetime, timedelta
-
+from .codziennePowiadomienie import porada
 views = Blueprint("views", __name__)
 
 
 @views.route('/wycieczka', methods=['GET', 'POST'])
 def wycieczka():
-    zmienna = False
     citi = ""
     citi2 = ""
     data = []
@@ -23,7 +22,6 @@ def wycieczka():
     data2 = datetime.today().date() + timedelta(days=7)
 
     if request.method == 'POST':
-        zmienna = True
         time = datetime.strptime(request.form.get('time'), '%Y-%m-%d')
         time2 = datetime.strptime(request.form.get('time2'), '%Y-%m-%d')
         citi = request.form.get('miasto_data')
@@ -51,10 +49,8 @@ def wycieczka():
                         pm2.append(dzien2.min_temp)
                         pm2.append(dzien2.max_temp)
                         pm2.append(dzien2.stanpogody.stan_pogody)
-            print(citi)
-            print(citi2)
-            print(pm1)
-    return render_template('./wycieczka/wycieczka.html', poczatek=data1, koniec=data2, tabela=zmienna, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
+        
+    return render_template('./wycieczka/wycieczka.html', poczatek=data1, koniec=data2, user=current_user, cities=db.session.query(Miasto).all(), dane=db.session.query(Miasto).filter_by(nazwa_miasta=citi).first(), miasto=data, pogoda1=pm1, pogoda2=pm2)
 
 
 @views.route('/ustawienia', methods=['GET', 'POST'])
@@ -75,7 +71,7 @@ def ustawienia():
                 current_user.miasta.append(dodawane_miasto)
             else:
                 print("masz już takie miasto gamoniu") #daj tu jakiegoś flasza marek
-                flash("Masz już takie miasto przypisane",category='error')
+                flash("Masz już takie miasto przypisane",category='pogodnie')
 
         temp = request.form.get('temp')
         predkosc = request.form.get('predkosc')
@@ -211,6 +207,20 @@ def login():
         if user:
             if user.password == password:
                 login_user(user, remember=True)
+
+                i=1;
+                for miasto in current_user.miasta:
+                    pogoda = miasto.pogoda_dzienna
+                    if(pogoda):
+                        for dzien in pogoda:
+                            if(dzien.data.date() == datetime.today().date()):
+                                napis = miasto.nazwa_miasta.upper()+": min.: "+str(dzien.min_temp)+"°C, maks.: "+str(dzien.max_temp)+"°C. "+porada(dzien)
+                                print(napis, '_'+str(i))
+                                flash(napis,category='_'+str(i))
+                                i=i+1
+                            if(i>3): break
+
+
                 return redirect(url_for('views.home'))
 
     return render_template('./login/login.html')

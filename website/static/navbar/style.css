@@ -29,7 +29,7 @@
 }
 
 @keyframes fading {
-  70% {
+  90% {
     opacity: 1;
   }
 
@@ -40,4 +40,68 @@
 }
 .error{
   margin:auto 0;
+}
+
+._1{
+  width: 600px;
+  height: 72px;
+  position: absolute;
+  display: flex;
+  font-size:1.25rem;
+  font-weight:bold;
+  align-items: center;
+  flex-direction: column;
+  background-color:#D9A60D;
+  top: 0px;
+  /* background-image: url("http://openweathermap.org/img/wn/01d@2x.png"); */
+  left: calc(50vw - 200px);
+  animation: fading 21s;
+  animation-fill-mode: forwards;  
+  background-position: right; 
+  background-repeat: no-repeat; 
+  background-size: 100px 100px;
+   z-index: 1; 
+}
+.pog{
+  margin:auto 0; 
+}
+._2{
+  width: 600px;
+  height: 72px;
+  position: absolute;
+  display: flex;
+  font-size:1.25rem;
+  font-weight:bold;
+  align-items: center;
+  flex-direction: column;
+  background-color:#D9A60D;
+  top: 0px;
+  /* background-image: url("http://openweathermap.org/img/wn/01d@2x.png"); */
+  left: calc(50vw - 200px);
+  animation: fading 14s;
+  animation-fill-mode: forwards;  
+  background-position: right; 
+  background-repeat: no-repeat; 
+  background-size: 100px 100px;
+   z-index: 1; 
+}
+._3{
+  width: 600px;
+  height: 72px;
+  position: absolute;
+  display: flex;
+  font-size:1.25rem;
+  font-weight:bold;
+  align-items: center;
+  flex-direction: column;
+  background-color:#D9A60D;
+  top: 0px;
+  /* background-image: url("http://openweathermap.org/img/wn/01d@2x.png"); */
+  left: calc(50vw - 200px);
+  animation: fading 7s;
+  animation-fill-mode: forwards;  
+  background-position: right; 
+  background-repeat: no-repeat; 
+  background-size: 100px 100px;
+   z-index: 1; 
 }
