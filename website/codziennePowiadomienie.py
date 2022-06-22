@@ -64,7 +64,7 @@ def powiadomieniePogodowe(app, db):
                                 #print(uzytkownik.username + ' ' + uzytkownik.email)
                                 #print(miasto.uzytkownicy[0].email)
                                 #if(uzytkownik.username == 'mikolaj'):
-                                wiadomosc = Message("Powiadomienie o pogodzie - "+miasto.nazwa_miasta, recipients = ['167828@stud.prz.edu.pl'])
+                                wiadomosc = Message("Powiadomienie o pogodzie - "+miasto.nazwa_miasta, recipients = [uzytkownik.email])
                                 wiadomosc.html = "<h3>Dzień dobry "+ uzytkownik.username.capitalize() +",</h3><h4>Stan pogody w miejscowości "+ miasto.nazwa_miasta+" to: '"+ status +"'.</h4><h4> Minimalna temperatura dzisiaj to: "+str(int(minT))+"°C, a maksymalna to: "+str(int(maxT))+"°C.</h4><h4>"+porada(dzien)+"</h4></br><h4>Miłego dnia :)</h4>"
                                 with app.open_resource('cat.jpg') as cat:
                                     wiadomosc.attach('cat.jpg', 'image/jpeg', cat.read())

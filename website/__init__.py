@@ -63,7 +63,7 @@ def create_app():
     #powiadomieniePogodowe(app,db)
 
     sched = BackgroundScheduler(daemon=True)
-    sched.add_job(powiadomieniePogodowe, 'cron', day='*', hour=8, minute=30,
+    sched.add_job(powiadomieniePogodowe, 'cron', day='*', hour=7, minute=55,
                   args=(app, db))  # każdego dnia o godzinie 8:30 wykonuje funkcję
     sched.add_job(wczytaj, 'cron', day='*', hour=0, minute=15, args=(app, db))
     sched.start()
