@@ -17,8 +17,8 @@ def create_app():
     app = Flask(__name__, static_folder='./static')
     app.config['SECRET_KEY'] = "gflgkdfgdfgogsdfksdflsdsfkgekh"
     # app.config['SQLALCHEMY_ECHO'] = True   #wypisuje sql
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-
+    #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vajwsbdgsxoykl:563d64e83c65bd764b727d14abd028e14377d799808bd8689b76670eb538263f@ec2-23-23-151-191.compute-1.amazonaws.com:5432/dc2cb9qstedvkt'
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
     app.config['MAIL_PORT'] = 465
     app.config['MAIL_USE_TLS'] = False
@@ -59,7 +59,7 @@ def create_app():
 
     #zaladuj_przyklad(app, db)
     # dodaj(app,db)
-    #wczytaj(app, db)
+    #wczytaj(app,db)
     #powiadomieniePogodowe(app,db)
 
     sched = BackgroundScheduler(daemon=True)

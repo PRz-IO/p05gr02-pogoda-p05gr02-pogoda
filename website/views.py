@@ -71,7 +71,7 @@ def ustawienia():
                 current_user.miasta.append(dodawane_miasto)
             else:
                 print("masz już takie miasto gamoniu") #daj tu jakiegoś flasza marek
-                flash("Masz już takie miasto przypisane",category='pogodnie')
+                flash("Masz już takie miasto przypisane",category='error')
 
         temp = request.form.get('temp')
         predkosc = request.form.get('predkosc')
@@ -191,6 +191,11 @@ def sign_up():
         else :
             new_user = User(email=email, username=firstName, password=passwords[0])
             db.session.add(new_user)
+            dtemp = db.session.query(Jednostka).filter_by(nazwa_jednostki="C").first()
+            dcis = db.session.query(Jednostka).filter_by(nazwa_jednostki="hPa").first()
+            dpred = db.session.query(Jednostka).filter_by(nazwa_jednostki="km/h").first()
+            dwil = db.session.query(Jednostka).filter_by(nazwa_jednostki="%").first()
+            new_user.preferencje.extend([dtemp, dcis, dpred, dwil])
             db.session.commit()
             return redirect(url_for('views.login'))
 
@@ -216,6 +221,7 @@ def login():
                             if(dzien.data.date() == datetime.today().date()):
                                 #napis = miasto.nazwa_miasta.upper()+": min.: "+str(dzien.min_temp)+"°C, maks.: "+str(dzien.max_temp)+"°C. "+porada(dzien)
                                 napis = f"{miasto.nazwa_miasta} - temp. minimalna: {dzien.min_temp}°C, temp. maksymalna: {dzien.max_temp}°C. {porada(dzien)}"
+                                flash(napis, category='_'+str(i))
                                 i=i+1
                     if(i>3): break
 
